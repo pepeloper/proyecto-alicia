@@ -6,7 +6,7 @@ export default function Welcome() {
             <Head title="Welcome" />
             <main className="flex h-screen flex-col items-center justify-center bg-[#003046]">
                 <svg
-                    className="w-80"
+                    className="w-1/3 lg:w-80"
                     viewBox="0 0 38 46"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -27,9 +27,31 @@ export default function Welcome() {
                         </clipPath>
                     </defs>
                 </svg>
-                <h1 className="mt-12 text-4xl font-bold text-white">
-                    En construcción
+                <h1 className="mt-12 px-6 text-center text-lg font-bold text-white lg:text-4xl">
+                    Alicia nace para ayudar a quienes lo han perdido todo, hoy y
+                    mañana.
                 </h1>
+                <h2 className="mt-6 px-6 text-left text-base text-white lg:text-lg">
+                    En estos momentos de dificultad tras la catástrofe de la
+                    DANA, queremos ofrecer una manera de dar más allá de lo
+                    urgente, porque la ayuda no termina cuando las cámaras se
+                    van.
+                    <br /> <br />
+                    <b>
+                        Alicia es un espacio solidario donde puedes donar
+                        muebles, enseres y objetos del hogar a quienes han
+                        sufrido la devastación en sus casas.
+                    </b>
+                    <br /> <br />
+                    Nos inspiramos en las barracas valencianas para crear un
+                    lugar de refugio y reconstrucción, una comunidad que seguirá
+                    ahí cuando todo vuelva a la calma.
+                    <br />
+                </h2>
+                <p className="mt-6 px-6 text-center text-base font-bold text-white lg:text-lg">
+                    Únete a nosotros y ayúdanos a ayudar. Que nadie quede en el
+                    olvido.
+                </p>
             </main>
         </>
     );
