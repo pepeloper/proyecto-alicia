@@ -11,36 +11,34 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'Muebles' => [
-                'Asientos',
-                'Mesas',
-                'Almacenaje',
-                'Camas',
-                'Muebles de Oficina',
-            ],
-            'Ropa' => [
-                'Hombre',
-                'Mujer',
-                'Niños',
-                'Zapatos',
-                'Accesorios',
-            ],
+            'Sillas',
+            'Mesas',
+            'Sofás',
+            'Camas',
+            'Escritorios',
+            'Aparadores',
+            'Muebles TV',
+            'Cómodas',
+            'Estanterías',
+            'Textil de hogar',
+            'Iluminación',
+            'Electrodomésticos',
         ];
 
-        foreach ($categories as $categoryName => $subcategories) {
+        foreach ($categories as $categoryName) {
             $category = Category::create([
                 'name' => $categoryName,
                 'slug' => Str::slug($categoryName),
                 'parent_id' => null,
             ]);
 
-            foreach ($subcategories as $subcategoryName) {
-                Category::create([
-                    'name' => $subcategoryName,
-                    'slug' => Str::slug($subcategoryName),
-                    'parent_id' => $category->id,
-                ]);
-            }
+            // foreach ($subcategories as $subcategoryName) {
+            //     Category::create([
+            //         'name' => $subcategoryName,
+            //         'slug' => Str::slug($subcategoryName),
+            //         'parent_id' => $category->id,
+            //     ]);
+            // }
         }
     }
 }

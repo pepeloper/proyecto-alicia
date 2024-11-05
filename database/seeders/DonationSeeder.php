@@ -28,9 +28,9 @@ class DonationSeeder extends Seeder
                 'contact_value' => '+34600000000',
             ],
             [
-                'category' => 'Ropa',
-                'name' => 'Camiseta',
-                'description' => 'Camiseta de algodón, talla M, color azul',
+                'category' => 'Textil de hogar',
+                'name' => 'Sabanas',
+                'description' => 'Sabanas de algodón, talla M, color azul',
                 'dimensions' => [35, 5, 25],
                 'address' => [
                     'street_address' => 'Avenida del Puerto, 100',
@@ -43,9 +43,9 @@ class DonationSeeder extends Seeder
                 'contact_value' => 'usuarioprueba@example.com',
             ],
             [
-                'category' => 'Almacenaje',
-                'name' => 'Caja de cartón',
-                'description' => 'Caja de cartón, tamaño grande, para almacenar libros',
+                'category' => 'Estanterías',
+                'name' => 'Estantería',
+                'description' => 'Estantería de madera, para almacenar libros',
                 'dimensions' => [45, 30, 30],
                 'address' => [
                     'street_address' => 'Calle de Ruzafa, 25',
@@ -56,6 +56,21 @@ class DonationSeeder extends Seeder
                 ],
                 'contact_channel' => 'whatsapp',
                 'contact_value' => '+34611111111',
+            ],
+            [
+                'category' => 'Iluminación',
+                'name' => 'Lámpara',
+                'description' => 'Lámpara de pie, color blanco',
+                'dimensions' => [30, 30, 120],
+                'address' => [
+                    'street_address' => 'Calle de Ruzafa, 25',
+                    'city' => 'Valencia',
+                    'postal_code' => '46006',
+                    'state' => 'Valencia',
+                    'country' => 'Spain',
+                ],
+                'contact_channel' => 'whatsapp',
+                'contact_value' => '+34622222222',
             ],
         ];
 
