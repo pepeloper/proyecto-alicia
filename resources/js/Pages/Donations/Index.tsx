@@ -15,8 +15,6 @@ export default function Index({
   donations: Donation[];
   section: string | null;
 }>) {
-  console.log('categories', categories);
-  console.log('donations', donations);
   const categoryScrollRef = useRef<HTMLElement>(null);
 
   useEffect(() => {

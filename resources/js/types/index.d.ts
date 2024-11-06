@@ -44,10 +44,7 @@ interface Donation {
   depth: number | null;
   need_transport: boolean;
   street_address: string;
-  city: string;
-  postal_code: string;
-  state: string | null;
-  country: string;
+  area: string;
   latitude: number | null;
   longitude: number | null;
   contact_channel: string;

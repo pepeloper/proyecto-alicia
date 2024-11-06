@@ -24,7 +24,7 @@ class DonationController extends Controller
             return Donation::orderBy('created_at', 'desc')
                 ->when($section, function ($query) use ($section) {
                     return $query->whereHas('category', function ($subQuery) use ($section) {
-                        $subQuery->where('name', $section);
+                        $subQuery->where('slug', $section);
                     });
                 })
                 ->with(['category', 'images'])
@@ -70,7 +70,7 @@ class DonationController extends Controller
 
     public function show($uuid)
     {
-        $donation = Donation::where('uuid', $uuid)->first();
+        $donation = Donation::where('uuid', $uuid)->with(['category', 'images'])->first();
 
         return Inertia::render('Donations/Show', [
             'donation' => $donation,

@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/react';
 import Carousel from 'react-multi-carousel';
 import TreasureMap from './Icons/TreasureMap';
 
-const CustomDot = ({
+export const CustomDot = ({
   index,
   onClick,
   active,
@@ -78,7 +78,7 @@ export default function DonationCard({ donation }: { donation: Donation }) {
       </div>
       <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-alicia-light-orange px-4 py-1 text-sm text-alicia-dark-orange">
         <TreasureMap />
-        {donation.city}
+        {donation.area}
       </div>
       <div className="absolute right-4 top-4 flex items-center gap-2 rounded-full bg-black/40 px-4 py-1 text-sm text-white">
         {formatRelativeTime(donation.created_at)}
