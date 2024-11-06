@@ -13,7 +13,7 @@ Levantar el backend
 Levantar el frontend
 - `npm run dev`
 
-## Notas
+## Notas
 
 Para trabajar con formularios, Inertia expone un hook llamado `useForm` que se puede usar para obtener el estado del formulario y enviar los datos.
 
