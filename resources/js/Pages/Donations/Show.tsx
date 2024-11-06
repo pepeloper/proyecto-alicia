@@ -27,6 +27,7 @@ const responsive = {
 };
 
 export default function Show({ donation }: { donation: Donation }) {
+  console.log('🚀 ~ Show ~ donation:', donation);
   return (
     <>
       <Head title="Detalle donación" />

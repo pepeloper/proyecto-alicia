@@ -1,4 +1,5 @@
 {
+    "name": "proyecto-alicia",
     "private": true,
     "type": "module",
     "scripts": {

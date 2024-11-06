@@ -5,9 +5,45 @@ import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Category } from '@/types';
 import { Select, Switch } from '@headlessui/react';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
+
+type ContactChannel = 'whatsapp' | 'email';
 
 export default function Create({ categories }: { categories: Category[] }) {
+  const { data, setData, post, processing, errors, reset } = useForm({
+    name: '',
+    description: '',
+    category_id: null as Category['id'] | null,
+    width: null,
+    height: null,
+    depth: null,
+    need_transport: false,
+    street_address: '',
+    contact_channel: 'whatsapp' as ContactChannel,
+    contact_value: '',
+  });
+
+  function handleChange(
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) {
+    const key = e.target.id as keyof typeof data;
+    const value = e.target.value;
+    setData(key, value);
+  }
+
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    post('/donacion', {
+      preserveScroll: true,
+      onSuccess: (e) => {
+        console.log('🚀 ~ TODO handle success', e);
+        reset();
+      },
+    });
+  }
+
   return (
     <>
       <Head title="Crear donación" />
@@ -24,10 +60,11 @@ export default function Create({ categories }: { categories: Category[] }) {
           Donación de mobiliario
         </h1>
 
-        <form className="mt-6 w-full">
+        <form className="mt-6 w-full" onSubmit={submit}>
           <div>
             <InputLabel htmlFor="name">Nombre</InputLabel>
-            <TextInput id="name" name="name" />
+            <TextInput id="name" name="name" onChange={handleChange} />
+            {errors.name && <div className="to-red-700">{errors.name}</div>}
           </div>
 
           <div className="mt-4">
@@ -35,16 +72,21 @@ export default function Create({ categories }: { categories: Category[] }) {
             <textarea
               id="description"
               name="description"
+              onChange={handleChange}
               className="mt-0.5 h-24 w-full rounded-md border-gray-300 shadow-sm focus:border-alicia-blue focus:ring-alicia-blue"
             />
+            {errors.description && (
+              <div className="to-red-700">{errors.description}</div>
+            )}
           </div>
 
           <div className="mt-4">
-            <InputLabel>Categoría</InputLabel>
+            <InputLabel htmlFor="category_id">Categoría</InputLabel>
             <Select
-              id="category"
-              name="category"
+              id="category_id"
+              name="category_id"
               className="mt-0.5 w-full rounded-md border-gray-300"
+              onChange={(e) => setData('category_id', parseInt(e.target.value))}
             >
               <option value="">Selecciona una categoría</option>
               {categories.map((category) => (
@@ -53,6 +95,9 @@ export default function Create({ categories }: { categories: Category[] }) {
                 </option>
               ))}
             </Select>
+            {errors.category_id && (
+              <div className="to-red-700">{errors.category_id}</div>
+            )}
           </div>
 
           <div className="mt-4">
@@ -63,17 +108,29 @@ export default function Create({ categories }: { categories: Category[] }) {
                   id="width"
                   name="width"
                   placeholder="(A) Ancho en cm  "
+                  onChange={handleChange}
                 />
+                {errors.width && (
+                  <div className="to-red-700">{errors.width}</div>
+                )}
                 <TextInput
                   id="height"
                   name="height"
-                  placeholder="(B) Fondo en cm"
+                  placeholder="(B) Alto en cm"
+                  onChange={handleChange}
                 />
+                {errors.height && (
+                  <div className="to-red-700">{errors.height}</div>
+                )}
                 <TextInput
                   id="depth"
                   name="depth"
-                  placeholder="(C) Alto en cm"
+                  placeholder="(C) Fondo en cm"
+                  onChange={handleChange}
                 />
+                {errors.depth && (
+                  <div className="to-red-700">{errors.depth}</div>
+                )}
               </div>
               <img
                 src="/images/medidas_del_producto_ayuda.png"
@@ -99,8 +156,8 @@ export default function Create({ categories }: { categories: Category[] }) {
               ¿Dispones de transporte?
             </InputLabel>
             <Switch
-              checked={true}
-              onChange={() => {}}
+              checked={data.need_transport}
+              onChange={(checked) => setData('need_transport', checked)}
               className="group relative mt-0.5 flex h-7 w-14 cursor-pointer rounded-full bg-neutral-300 p-1 transition-colors duration-200 ease-in-out focus:outline-none data-[checked]:bg-alicia-orange data-[focus]:outline-1 data-[focus]:outline-white"
             >
               <span
@@ -108,39 +165,51 @@ export default function Create({ categories }: { categories: Category[] }) {
                 className="pointer-events-none inline-block size-5 translate-x-0 rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out group-data-[checked]:translate-x-7"
               />
             </Switch>
+            {errors.need_transport && (
+              <div className="to-red-700">{errors.need_transport}</div>
+            )}
           </div>
 
           <div className="mt-4">
-            <InputLabel>Ubicación</InputLabel>
+            <InputLabel htmlFor="street_address">Ubicación</InputLabel>
             <p className="-mt-1 mb-1 text-sm text-neutral-500">
               Especifica tu barrio, zona o ciudad
             </p>
             <TextInput
-              id="location"
-              name="location"
+              id="street_address"
+              name="street_address"
               placeholder="Ejemplo: Patraix, Valencia"
+              onChange={handleChange}
             />
+            {errors.street_address && (
+              <div className="to-red-700">{errors.street_address}</div>
+            )}
           </div>
           <div className="mt-4">
             <p className="block text-lg font-bold text-alicia-blue">
               Quiero que me contacten por
             </p>
             <div className="mt-1">
-              <InputLabel htmlFor="whatsapp">Whatsapp</InputLabel>
+              <InputLabel htmlFor="contact_value">Whatsapp</InputLabel>
               <TextInput
-                id="whatsapp"
-                name="whatsapp"
+                id="contact_value"
+                name="contact_value"
                 placeholder="Introduce tu número de teléfono"
+                onChange={handleChange}
               />
             </div>
-            <div className="mt-1">
+            {/* <div className="mt-1">
               <InputLabel htmlFor="email">Email</InputLabel>
               <TextInput
                 id="email"
                 name="email"
                 placeholder="Introduce tu correo electrónico"
+                onChange={handleChange}
               />
-            </div>
+            </div> */}
+            {errors.contact_channel && (
+              <div className="to-red-700">{errors.contact_channel}</div>
+            )}
           </div>
 
           <div className="mt-4 text-pretty text-center">
@@ -154,7 +223,11 @@ export default function Create({ categories }: { categories: Category[] }) {
             </p>
 
             <div className="mt-4 flex flex-col items-center gap-4">
-              <PrimaryButton type="submit" className="w-auto px-4">
+              <PrimaryButton
+                type="submit"
+                className="w-auto px-4"
+                disabled={processing}
+              >
                 Publicar
               </PrimaryButton>
               <Link
