@@ -38,6 +38,15 @@ class DonationController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        $categories = Category::where('parent_id', null)->get();
+
+        return Inertia::render('Donations/Create', [
+            'categories' => $categories,
+        ]);
+    }
+
     public function store(DonationStore $request)
     {
         $payload = $request->validated();

@@ -1,5 +1,5 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
 import DonationCard from '@/Components/DonationCard';
+import GuestLayout from '@/Layouts/GuestLayout';
 import { Category, Donation, PageProps } from '@/types';
 import { cn } from '@/utils';
 import { Head, Link } from '@inertiajs/react';
@@ -38,13 +38,7 @@ export default function Index({
     <>
       <Head title="Proyecto Alicia" />
 
-      <header className="flex items-center bg-alicia-blue py-3">
-        <div className="container mx-auto px-6">
-          <ApplicationLogo className="w-10" />
-        </div>
-      </header>
-
-      <main className="container mx-auto px-6 py-4">
+      <GuestLayout>
         <section
           ref={categoryScrollRef}
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto py-2"
@@ -83,7 +77,7 @@ export default function Index({
             <DonationCard key={donation.id} donation={donation} />
           ))}
         </section>
-      </main>
+      </GuestLayout>
     </>
   );
 }
