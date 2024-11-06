@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DonationStore;
 use App\Models\Category;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\Geocoder\Facades\Geocoder;
+use Illuminate\Support\Str;
 
 class DonationController extends Controller
 {
@@ -27,5 +30,13 @@ class DonationController extends Controller
             'categories' => $categories,
             'section' => $section,
         ]);
+    }
+
+    public function store(DonationStore $request)
+    {
+        $payload = $request->validated();
+        $payload['uuid'] = (string) Str::ulid();
+        $donation = Donation::create($payload);
+        return redirect()->route('donations.index');
     }
 }

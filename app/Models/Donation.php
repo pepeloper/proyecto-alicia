@@ -19,38 +19,42 @@ class Donation extends Model
         'depth',
         'need_transport',
         'street_address',
-        'city',
-        'postal_code',
-        'state',
-        'country',
+        'area',
         'latitude',
-        'longitude'
+        'longitude',
+        'contact_channel',
+        'contact_value',
     ];
 
     protected static function booted()
     {
         static::saving(function ($donation) {
             if ($donation->isDirty(['street_address', 'city', 'postal_code', 'country'])) {
-                $address = implode(', ', array_filter([
-                    $donation->street_address,
-                    $donation->city,
-                    $donation->postal_code,
-                    $donation->state,
-                    $donation->country,
-                ]));
-
-                try {
-                    $result = Geocoder::getCoordinatesForAddress($address);
-
-                    if ($result['lat'] && $result['lng']) {
-                        $donation->latitude = $result['lat'];
-                        $donation->longitude = $result['lng'];
-                    }
-                } catch (\Exception $e) {
-                    report($e);
-                }
+                $donation->geocodeAddress();
             }
         });
+    }
+
+    private function geocodeAddress()
+    {
+        $address = implode(', ', array_filter([
+            $this->street_address,
+            $this->city,
+            $this->postal_code,
+            $this->state,
+            $this->country,
+        ]));
+
+        try {
+            $result = Geocoder::getCoordinatesForAddress($address);
+
+            if ($result['lat'] && $result['lng']) {
+                $this->latitude = $result['lat'];
+                $this->longitude = $result['lng'];
+            }
+        } catch (\Exception $e) {
+            report($e);
+        }
     }
 
     public function category(): BelongsTo

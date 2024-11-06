@@ -25,10 +25,7 @@ return new class extends Migration
             $table->boolean('need_transport')->default(false);
 
             $table->string('street_address');
-            $table->string('city');
-            $table->string('postal_code');
-            $table->string('state')->nullable();
-            $table->string('country');
+            $table->string('area')->nullable();
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
 

@@ -46,6 +46,11 @@ class DonationImageSeeder extends Seeder
                 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af',
                 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e6',
             ],
+            'Textil de hogar' => [
+                'https://images.unsplash.com/photo-1586318018858-4df3297d11d5',
+                'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af',
+                'https://plus.unsplash.com/premium_photo-1670475326413-f69f74397650',
+            ],
         ];
 
         $donations = Donation::with('category')->get();
