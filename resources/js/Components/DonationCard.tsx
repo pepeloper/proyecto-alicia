@@ -1,5 +1,6 @@
 import { Donation } from '@/types';
 import { cn, formatRelativeTime } from '@/utils';
+import { Link } from '@inertiajs/react';
 import Carousel from 'react-multi-carousel';
 import TreasureMap from './Icons/TreasureMap';
 
@@ -19,7 +20,7 @@ const CustomDot = ({
         e.preventDefault();
       }}
       className={cn('h-2 rounded-full bg-white', {
-        'w-6': active,
+        'w-8': active,
         'w-2': !active,
       })}
     />
@@ -51,6 +52,10 @@ export default function DonationCard({ donation }: { donation: Donation }) {
       key={donation.id}
       className="relative h-56 overflow-hidden rounded shadow-lg"
     >
+      <Link
+        className="absolute inset-0 z-50"
+        href={route('donations.show', donation.uuid)}
+      />
       <div className="absolute inset-0">
         <Carousel
           arrows={false}
