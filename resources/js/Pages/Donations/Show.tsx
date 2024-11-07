@@ -60,7 +60,9 @@ export default function Show({ donation }: { donation: Donation }) {
               {donation.images.map((image) => (
                 <img
                   key={image.id}
-                  src={image.url}
+                  src={
+                    image.url.startsWith('http') ? image.url : `/${image.url}`
+                  }
                   alt={donation.name}
                   className="h-72 w-full rounded object-cover"
                 />

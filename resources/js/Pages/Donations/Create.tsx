@@ -17,6 +17,7 @@ export default function Create({ categories }: { categories: Category[] }) {
     width: null,
     height: null,
     depth: null,
+    images: [] as File[],
     need_transport: false,
     street_address: '',
     contact_channel: 'whatsapp' as ContactChannel,
@@ -145,6 +146,12 @@ export default function Create({ categories }: { categories: Category[] }) {
               type="file"
               id="image"
               name="image"
+              onChange={(e) => {
+                const files = e.target.files;
+                if (files) {
+                  setData('images', Array.from(files));
+                }
+              }}
               className="mt-0.5 w-full border-gray-300 shadow-sm focus:border-alicia-blue focus:ring-alicia-blue"
               max={3}
               multiple
