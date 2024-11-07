@@ -67,7 +67,11 @@ export default function DonationCard({ donation }: { donation: Donation }) {
           {donation.images.map((image) => (
             <img
               key={image.id}
-              src={image.url}
+              src={
+                image.url.startsWith('http')
+                  ? image.url
+                  : `/storage/${image.url}`
+              }
               alt={donation.name}
               className="h-full w-full object-cover"
             />

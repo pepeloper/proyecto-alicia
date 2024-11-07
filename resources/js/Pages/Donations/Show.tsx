@@ -61,7 +61,9 @@ export default function Show({ donation }: { donation: Donation }) {
                 <img
                   key={image.id}
                   src={
-                    image.url.startsWith('http') ? image.url : `/${image.url}`
+                    image.url.startsWith('http')
+                      ? image.url
+                      : `/storage/${image.url}`
                   }
                   alt={donation.name}
                   className="h-72 w-full rounded object-cover"
