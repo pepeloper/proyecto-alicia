@@ -63,12 +63,12 @@ class DonationController extends Controller
             }
         }
 
-        foreach ($request->file('images') as $index => $image) {
-            $donation->images()->create([
-                'url' => $image->store('donations', 'public'),
-                'order' => $index + 1,
-            ]);
-        }
+        // foreach ($request->file('images') as $index => $image) {
+        //     $donation->images()->create([
+        //         'url' => $image->store('donations', 'public'),
+        //         'order' => $index + 1,
+        //     ]);
+        // }
 
         // TODO: Send email to the user creating the donation.
 
