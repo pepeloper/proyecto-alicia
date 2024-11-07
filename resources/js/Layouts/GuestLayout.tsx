@@ -16,7 +16,7 @@ export default function Guest({
         </div>
       </header>
 
-      <main className="container mx-auto px-6 py-4">{children}</main>
+      <main className="container mx-auto px-6 pb-12 pt-4">{children}</main>
 
       {showCreateButton && (
         <section className="fixed bottom-4 right-4 z-50">
