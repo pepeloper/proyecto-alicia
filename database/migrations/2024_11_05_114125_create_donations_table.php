@@ -24,13 +24,12 @@ return new class extends Migration
 
             $table->boolean('need_transport')->default(false);
 
-            $table->string('street_address');
-            $table->string('area')->nullable();
+            $table->string('area');
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
 
-            $table->string('contact_channel')->default('whatsapp');
-            $table->string('contact_value');
+            $table->string('contact_whatsapp')->nullable();
+            $table->string('contact_email')->nullable();
 
             $table->timestamps();
         });

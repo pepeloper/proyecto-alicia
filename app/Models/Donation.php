@@ -18,12 +18,11 @@ class Donation extends Model
         'height',
         'depth',
         'need_transport',
-        'street_address',
         'area',
         'latitude',
         'longitude',
-        'contact_channel',
-        'contact_value',
+        'contact_whatsapp',
+        'contact_email',
     ];
 
     protected static function booted()

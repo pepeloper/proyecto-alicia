@@ -17,10 +17,7 @@ class DonationSeeder extends Seeder
                 'name' => 'Mesa de comedor',
                 'description' => 'Mesa de madera maciza, extensible hasta 8 personas. Incluye 6 sillas.',
                 'dimensions' => [60, 85, 180],
-                'address' => [
-                    'street_address' => 'Calle Colón, 50',
-                    'area' => 'Benetusser',
-                ],
+                'area' => 'Benetusser',
                 'contact_channel' => 'whatsapp',
                 'contact_value' => '+34600000000',
             ],
@@ -29,10 +26,7 @@ class DonationSeeder extends Seeder
                 'name' => 'Sabanas',
                 'description' => 'Sabanas de algodón, talla M, color azul',
                 'dimensions' => [35, 5, 25],
-                'address' => [
-                    'street_address' => 'Avenida del Puerto, 100',
-                    'area' => 'Paiporta',
-                ],
+                'area' => 'Paiporta',
                 'contact_channel' => 'email',
                 'contact_value' => 'usuarioprueba@example.com',
             ],
@@ -41,10 +35,7 @@ class DonationSeeder extends Seeder
                 'name' => 'Estantería',
                 'description' => 'Estantería de madera, para almacenar libros',
                 'dimensions' => [45, 30, 30],
-                'address' => [
-                    'street_address' => 'Calle de Ruzafa, 25',
-                    'area' => 'Beniparrell',
-                ],
+                'area' => 'Beniparrell',
                 'contact_channel' => 'whatsapp',
                 'contact_value' => '+34611111111',
             ],
@@ -53,10 +44,7 @@ class DonationSeeder extends Seeder
                 'name' => 'Lámpara',
                 'description' => 'Lámpara de pie, color blanco',
                 'dimensions' => [30, 30, 120],
-                'address' => [
-                    'street_address' => 'Calle de Ruzafa, 25',
-                    'area' => 'Massanassa',
-                ],
+                'area' => 'Massanassa',
                 'contact_channel' => 'whatsapp',
                 'contact_value' => '+34622222222',
             ],
@@ -74,10 +62,9 @@ class DonationSeeder extends Seeder
                 'height' => $donationData['dimensions'][1],
                 'depth' => $donationData['dimensions'][2],
                 'need_transport' => rand(0, 1),
-                'street_address' => $donationData['address']['street_address'],
-                'area' => $donationData['address']['area'],
-                'contact_channel' => $donationData['contact_channel'],
-                'contact_value' => $donationData['contact_value'],
+                'area' => $donationData['area'],
+                'contact_whatsapp' => $donationData['contact_channel'] === 'whatsapp' ? $donationData['contact_value'] : null,
+                'contact_email' => $donationData['contact_channel'] === 'email' ? $donationData['contact_value'] : null,
             ]);
         }
     }

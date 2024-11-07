@@ -1,4 +1,5 @@
 import Breadcrumb from '@/Components/Breadcrumb';
+import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
@@ -6,8 +7,6 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import { Category } from '@/types';
 import { Select, Switch } from '@headlessui/react';
 import { Head, Link, useForm } from '@inertiajs/react';
-
-type ContactChannel = 'whatsapp' | 'email';
 
 export default function Create({ categories }: { categories: Category[] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -19,9 +18,9 @@ export default function Create({ categories }: { categories: Category[] }) {
     depth: null,
     images: [] as File[],
     need_transport: false,
-    street_address: '',
-    contact_channel: 'whatsapp' as ContactChannel,
-    contact_value: '',
+    area: '',
+    contact_whatsapp: '',
+    contact_email: '',
   });
 
   function handleChange(
@@ -65,7 +64,7 @@ export default function Create({ categories }: { categories: Category[] }) {
           <div>
             <InputLabel htmlFor="name">Nombre</InputLabel>
             <TextInput id="name" name="name" onChange={handleChange} />
-            {errors.name && <div className="to-red-700">{errors.name}</div>}
+            {errors.name && <InputError message={errors.name} />}
           </div>
 
           <div className="mt-4">
@@ -76,9 +75,7 @@ export default function Create({ categories }: { categories: Category[] }) {
               onChange={handleChange}
               className="mt-0.5 h-24 w-full rounded-md border-gray-300 shadow-sm focus:border-alicia-blue focus:ring-alicia-blue"
             />
-            {errors.description && (
-              <div className="to-red-700">{errors.description}</div>
-            )}
+            {errors.description && <InputError message={errors.description} />}
           </div>
 
           <div className="mt-4">
@@ -96,44 +93,43 @@ export default function Create({ categories }: { categories: Category[] }) {
                 </option>
               ))}
             </Select>
-            {errors.category_id && (
-              <div className="to-red-700">{errors.category_id}</div>
-            )}
+            {errors.category_id && <InputError message={errors.category_id} />}
           </div>
 
           <div className="mt-4">
             <InputLabel htmlFor="width">Medidas del producto</InputLabel>
             <div className="mt-0.5 flex w-full items-center justify-between">
               <div className="flex flex-col gap-6">
-                <TextInput
-                  id="width"
-                  name="width"
-                  placeholder="(A) Ancho en cm  "
-                  onChange={handleChange}
-                />
-                {errors.width && (
-                  <div className="to-red-700">{errors.width}</div>
-                )}
-                <TextInput
-                  id="height"
-                  name="height"
-                  placeholder="(B) Alto en cm"
-                  onChange={handleChange}
-                />
-                {errors.height && (
-                  <div className="to-red-700">{errors.height}</div>
-                )}
-                <TextInput
-                  id="depth"
-                  name="depth"
-                  placeholder="(C) Fondo en cm"
-                  onChange={handleChange}
-                />
-                {errors.depth && (
-                  <div className="to-red-700">{errors.depth}</div>
-                )}
+                <div>
+                  <TextInput
+                    id="width"
+                    name="width"
+                    placeholder="(A) Ancho en cm  "
+                    onChange={handleChange}
+                  />
+                  {errors.width && <InputError message={errors.width} />}
+                </div>
+                <div>
+                  <TextInput
+                    id="height"
+                    name="height"
+                    placeholder="(B) Alto en cm"
+                    onChange={handleChange}
+                  />
+                  {errors.height && <InputError message={errors.height} />}
+                </div>
+                <div>
+                  <TextInput
+                    id="depth"
+                    name="depth"
+                    placeholder="(C) Fondo en cm"
+                    onChange={handleChange}
+                  />
+                  {errors.depth && <InputError message={errors.depth} />}
+                </div>
               </div>
               <img
+                className="h-full"
                 src="/images/medidas_del_producto_ayuda.png"
                 alt="Explicación de las medidas"
               />
@@ -156,6 +152,7 @@ export default function Create({ categories }: { categories: Category[] }) {
               max={3}
               multiple
             />
+            {errors.images && <InputError message={errors.images} />}
           </div>
 
           <div className="mt-4">
@@ -173,39 +170,28 @@ export default function Create({ categories }: { categories: Category[] }) {
               />
             </Switch>
             {errors.need_transport && (
-              <div className="to-red-700">{errors.need_transport}</div>
+              <InputError message={errors.need_transport} />
             )}
           </div>
 
           <div className="mt-4">
-            <InputLabel htmlFor="street_address">Ubicación</InputLabel>
+            <InputLabel htmlFor="area">Ubicación</InputLabel>
             <p className="-mt-1 mb-1 text-sm text-neutral-500">
               Especifica tu barrio, zona o ciudad
             </p>
             <TextInput
-              id="street_address"
-              name="street_address"
+              id="area"
+              name="area"
               placeholder="Ejemplo: Patraix, Valencia"
               onChange={handleChange}
             />
-            {errors.street_address && (
-              <div className="to-red-700">{errors.street_address}</div>
-            )}
+            {errors.area && <InputError message={errors.area} />}
           </div>
           <div className="mt-4">
             <p className="block text-lg font-bold text-alicia-blue">
               Quiero que me contacten por
             </p>
             <div className="mt-1">
-              <InputLabel htmlFor="contact_value">Whatsapp</InputLabel>
-              <TextInput
-                id="contact_value"
-                name="contact_value"
-                placeholder="Introduce tu número de teléfono"
-                onChange={handleChange}
-              />
-            </div>
-            {/* <div className="mt-1">
               <InputLabel htmlFor="email">Email</InputLabel>
               <TextInput
                 id="email"
@@ -213,10 +199,22 @@ export default function Create({ categories }: { categories: Category[] }) {
                 placeholder="Introduce tu correo electrónico"
                 onChange={handleChange}
               />
-            </div> */}
-            {errors.contact_channel && (
-              <div className="to-red-700">{errors.contact_channel}</div>
-            )}
+              {errors.contact_email && (
+                <InputError message={errors.contact_email} />
+              )}
+            </div>
+            <div className="mt-2">
+              <InputLabel htmlFor="contact_whatsapp">Whatsapp</InputLabel>
+              <TextInput
+                id="contact_whatsapp"
+                name="contact_whatsapp"
+                placeholder="Introduce tu número de teléfono"
+                onChange={handleChange}
+              />
+              {errors.contact_whatsapp && (
+                <InputError message={errors.contact_whatsapp} />
+              )}
+            </div>
           </div>
 
           <div className="mt-4 text-pretty text-center">

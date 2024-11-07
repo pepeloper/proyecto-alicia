@@ -47,8 +47,8 @@ interface Donation {
   area: string;
   latitude: number | null;
   longitude: number | null;
-  contact_channel: string;
-  contact_value: string;
+  contact_whatsapp: string | null;
+  contact_email: string | null;
   created_at: string;
   updated_at: string;
   category?: Category;
