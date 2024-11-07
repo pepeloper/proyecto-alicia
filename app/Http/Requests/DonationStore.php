@@ -32,6 +32,8 @@ class DonationStore extends FormRequest
             'street_address' => 'required|string|max:255',
             'contact_channel' => 'required|string|max:255',
             'contact_value' => 'required|string|max:255',
+            'images' => 'required|array|min:1|max:3',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
         ];
     }
 }

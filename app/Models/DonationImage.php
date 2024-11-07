@@ -9,11 +9,7 @@ class DonationImage extends Model
 {
     protected $fillable = [
         'donation_id',
-        'path',
-        'filename',
-        'mime_type',
-        'size',
-        'is_primary',
+        'url',
         'order'
     ];
 
