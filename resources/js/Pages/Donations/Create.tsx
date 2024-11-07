@@ -230,7 +230,7 @@ export default function Create({ categories }: { categories: Category[] }) {
             <div className="mt-4 flex flex-col items-center gap-4">
               <PrimaryButton
                 type="submit"
-                className="w-auto px-4"
+                className="w-auto px-24"
                 disabled={processing}
               >
                 Publicar
