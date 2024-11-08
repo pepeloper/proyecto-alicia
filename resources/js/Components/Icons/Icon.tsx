@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 
-const icons = ['close', 'treasureMap'] as const;
+const icons = ['close', 'treasureMap', 'share'] as const;
 
 export type IconType = (typeof icons)[number];
 
@@ -26,11 +26,12 @@ const IconComponents = icons.reduce(
 
 export interface IconProps {
   icon: IconType;
+  className?: string;
   onClick?: () => void;
 }
 
 export function Icon(props: IconProps) {
-  const { icon, onClick } = props;
+  const { icon, ...rest } = props;
   const Component = IconComponents[icon];
   if (!Component) {
     console.warn(
@@ -40,7 +41,7 @@ export function Icon(props: IconProps) {
   }
   return (
     <Suspense fallback={null}>
-      <Component onClick={onClick} />
+      <Component {...rest} />
     </Suspense>
   );
 }

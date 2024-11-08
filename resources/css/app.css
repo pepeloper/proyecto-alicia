@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 ul.react-multi-carousel-dot-list  {
-  @apply z-50 gap-2 bottom-4 left-4 justify-start;
+  @apply z-50 gap-2 bottom-4 left-4 justify-start max-w-52;
 }

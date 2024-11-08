@@ -35,6 +35,11 @@ export default function Show({ donation }: { donation: Donation }) {
 
   const [showModal, setShowModal] = useState(false);
 
+  const shareData = {
+    title: donation.name,
+    url: window.location.href,
+  };
+
   return (
     <>
       <Head title="Detalle donación" />
@@ -57,15 +62,6 @@ export default function Show({ donation }: { donation: Donation }) {
         />
         <section className="mt-6">
           <div className="relative w-full rounded">
-            <div className="absolute left-0 right-0 top-0 z-10 flex h-10 items-center gap-2 p-2">
-              <div className="flex items-center gap-1 rounded-full bg-alicia-orange px-2 py-0.5 text-white">
-                <Icon icon="treasureMap" />
-                {donation.area}
-              </div>
-              <div className="rounded-full bg-alicia-blue px-2 py-0.5 text-white">
-                {donation.category?.name}
-              </div>
-            </div>
             <Carousel
               arrows={false}
               responsive={responsive}
@@ -87,6 +83,26 @@ export default function Show({ donation }: { donation: Donation }) {
               ))}
             </Carousel>
             <div className="absolute inset-0 rounded bg-gradient-to-t from-black via-transparent to-transparent opacity-70" />
+            <div className="absolute left-0 right-0 top-0 z-10 flex h-10 items-center gap-2 p-2">
+              <div className="flex items-center gap-1 rounded-full bg-alicia-orange px-2 py-0.5 text-white">
+                <Icon icon="treasureMap" />
+                {donation.area}
+              </div>
+              <div className="rounded-full bg-alicia-blue px-2 py-0.5 text-white">
+                {donation.category?.name}
+              </div>
+            </div>
+            {navigator.canShare(shareData) && (
+              <div
+                className="absolute bottom-1 left-0 right-0 z-20 flex h-10 items-center justify-end gap-2 p-2"
+                onClick={() => navigator.share(shareData)}
+              >
+                <div className="flex cursor-pointer items-center gap-1 rounded-full bg-alicia-orange px-2 py-1 text-white">
+                  Compartir
+                  <Icon className="max-h-4 max-w-4 text-white" icon="share" />
+                </div>
+              </div>
+            )}
           </div>
         </section>
         <section className="mt-6">
