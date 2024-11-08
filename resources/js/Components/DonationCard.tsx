@@ -2,10 +2,9 @@ import { Donation } from '@/types';
 import { cn, formatRelativeTime } from '@/utils';
 import { Link } from '@inertiajs/react';
 import Carousel from 'react-multi-carousel';
-import TreasureMap from './Icons/TreasureMap';
+import { Icon } from './Icons/Icon';
 
 export const CustomDot = ({
-  index,
   onClick,
   active,
 }: {
@@ -81,7 +80,7 @@ export default function DonationCard({ donation }: { donation: Donation }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70" />
       </div>
       <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-alicia-light-orange px-4 py-1 text-sm text-alicia-dark-orange">
-        <TreasureMap />
+        <Icon icon="treasureMap" />
         {donation.area}
       </div>
       <div className="absolute right-4 top-4 flex items-center gap-2 rounded-full bg-black/40 px-4 py-1 text-sm text-white">

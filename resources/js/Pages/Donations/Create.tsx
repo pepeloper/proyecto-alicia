@@ -1,4 +1,5 @@
 import Breadcrumb from '@/Components/Breadcrumb';
+import { Icon } from '@/Components/Icons/Icon';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -178,15 +179,10 @@ export default function Create({ categories }: { categories: Category[] }) {
                       className="h-20 w-20 rounded-md object-cover"
                     />
                     <button className="absolute -right-2 -top-2 cursor-pointer rounded-full bg-white p-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 16 16"
-                        width="10px"
-                        height="10px"
+                      <Icon
+                        icon="close"
                         onClick={() => onRemoveImageClick(image)}
-                      >
-                        <path d="M 2.75 2.042969 L 2.042969 2.75 L 2.398438 3.101563 L 7.292969 8 L 2.042969 13.25 L 2.75 13.957031 L 8 8.707031 L 12.894531 13.605469 L 13.25 13.957031 L 13.957031 13.25 L 13.605469 12.894531 L 8.707031 8 L 13.957031 2.75 L 13.25 2.042969 L 8 7.292969 L 3.101563 2.398438 Z" />
-                      </svg>
+                      />
                     </button>
                   </div>
                 ))}
