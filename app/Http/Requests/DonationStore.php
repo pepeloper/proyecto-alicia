@@ -30,8 +30,8 @@ class DonationStore extends FormRequest
             'depth' => 'required|integer|min:1',
             'need_transport' => 'required|boolean',
             'area' => 'required|string|max:255',
-            'contact_whatsapp' => 'required_without:contact_email|numeric|max:12',
-            'contact_email' => 'required_without:contact_whatsapp|email|max:255',
+            'contact_whatsapp' => 'required_without:contact_email|numeric',
+            'contact_email' => 'required_without:contact_whatsapp|email|max:120',
             'images' => 'required|array|min:1|max:3',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,jpeg,gif,heic,webp|max:8192',
         ];
@@ -71,7 +71,6 @@ class DonationStore extends FormRequest
             'contact_email.required_without' => 'Debes introducir un número de teléfono o un correo electrónico.',
             'contact_whatsapp.numeric' => 'El número de teléfono debe ser un número.',
             'contact_email.email' => 'El correo electrónico debe ser un correo electrónico válido.',
-            'contact_whatsapp.max' => 'El número de teléfono no puede tener más de :max caracteres.',
             'contact_email.max' => 'El correo electrónico no puede tener más de :max caracteres.',
             'area.required' => 'Debes introducir un área.',
         ];

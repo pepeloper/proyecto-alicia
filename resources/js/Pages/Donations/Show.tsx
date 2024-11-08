@@ -1,9 +1,11 @@
 import Breadcrumb from '@/Components/Breadcrumb';
 import { CustomDot } from '@/Components/DonationCard';
+import Modal from '@/Components/Modal';
 import PrimaryButton from '@/Components/PrimaryButton';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Donation } from '@/types';
 import { Head } from '@inertiajs/react';
+import { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 
 import 'react-multi-carousel/lib/styles.css';
@@ -29,6 +31,9 @@ const responsive = {
 
 export default function Show({ donation }: { donation: Donation }) {
   console.log('🚀 ~ Show ~ donation:', donation);
+
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <>
       <Head title="Detalle donación" />
@@ -142,9 +147,45 @@ export default function Show({ donation }: { donation: Donation }) {
         </section>
 
         <section className="mt-6 flex w-full justify-center">
-          <PrimaryButton className="w-auto">Contactar</PrimaryButton>
+          <PrimaryButton
+            className="w-auto"
+            onClick={() => {
+              setShowModal(true);
+            }}
+          >
+            Contactar
+          </PrimaryButton>
         </section>
       </GuestLayout>
+
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        {donation.contact_whatsapp ? (
+          <div className="flex flex-col items-center gap-2">
+            <a
+              target="_blank"
+              href={`https://wa.me/${donation.contact_whatsapp}`}
+              className="text-lg font-semibold"
+              rel="noreferrer"
+            >
+              Whatsapp
+            </a>
+            <p>{donation.contact_whatsapp}</p>
+          </div>
+        ) : null}
+        {donation.contact_email ? (
+          <div className="mt-6 flex flex-col items-center gap-2">
+            <a
+              target="_blank"
+              href={`mailto:${donation.contact_email}`}
+              className="text-lg font-semibold"
+              rel="noreferrer"
+            >
+              Correo electrónico
+            </a>
+            <p>{donation.contact_email}</p>
+          </div>
+        ) : null}
+      </Modal>
     </>
   );
 }
